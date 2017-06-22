@@ -12,11 +12,11 @@ An introduction to convolutional neural networks using Tensorflow and and a ridi
 
 ### Prerequisites
 
-Python
-Tensorflow
-Numpy
-Scipy
-Pillow
+*Python
+*Tensorflow
+*Numpy
+*Scipy
+*Pillow
 
 
 
