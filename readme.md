@@ -28,10 +28,10 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under whatever the freeest possible license is. Feel free to use this software in nayway you see fit.
+This project is licensed under whatever the freeest possible license is. Feel free to use this software in anyway you see fit.
 
 ## Acknowledgments
 
-* This code is repurposed from the advanced MNIST tuorial by Tensorflow: https://www.tensorflow.org/get_started/mnist/pros
+* This code is repurposed from the advanced MNIST tutorial by Tensorflow: https://www.tensorflow.org/get_started/mnist/pros
 * The image data is form the CAMELYON16 challenge: https://camelyon16.grand-challenge.org/
 
