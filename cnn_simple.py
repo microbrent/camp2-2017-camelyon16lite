@@ -99,8 +99,6 @@ b_fc2 = bias_variable([2])
 y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
 
 
-
-
 ##---------------------------------
 ## Train and evaluate the network
 ##---------------------------------
@@ -139,12 +137,17 @@ def generate_training_test_data( res ):
   tumor_pos_tiles = load_tiles(tumor_pos_tiles_dir)
   y_tumor_pos = create_target([1, 0], len(tumor_pos_tiles))
 
-  num_tumor_pos_tiles = len(tumor_pos_tiles)
-  random.shuffle(tumor_neg_tiles)
-  random.shuffle(normal_tiles)
-
-  all_images = np.concatenate((normal_tiles[0:num_tumor_pos_tiles], tumor_neg_tiles[0:num_tumor_pos_tiles], tumor_pos_tiles))
-  all_targets = np.concatenate((y_normal[0:num_tumor_pos_tiles], y_tumor_neg[0:num_tumor_pos_tiles], y_tumor_pos))
+  use_all = True
+  if use_all:
+    all_images = np.concatenate((normal_tiles, tumor_neg_tiles, tumor_pos_tiles))
+    all_targets = np.concatenate((y_normal, y_tumor_neg, y_tumor_pos))
+  else:
+    num_tumor_pos_tiles = len(tumor_pos_tiles)
+    random.shuffle(tumor_neg_tiles)
+    random.shuffle(normal_tiles)
+    random.shuffle(tumor_pos_tiles)
+    all_images = np.concatenate((normal_tiles[0:num_tumor_pos_tiles], tumor_neg_tiles[0:num_tumor_pos_tiles], tumor_pos_tiles))
+    all_targets = np.concatenate((y_normal[0:num_tumor_pos_tiles], y_tumor_neg[0:num_tumor_pos_tiles], y_tumor_pos))
   all_data = list(zip(all_images, all_targets))
   random.shuffle(all_data)
 
@@ -169,6 +172,7 @@ for i in range(0, len(training_data), batch_size):
     train_accuracy = accuracy.eval(feed_dict={x_image:images, y_:targets, keep_prob:1.0})
     print("step %d, training accuracy %g"%(i, train_accuracy))
    train_step.run(feed_dict={x_image:images, y_:targets, keep_prob:0.5})
+
 
 # evaluate 
 batch0, batch1 = zip(*testing_data)
